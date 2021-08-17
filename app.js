@@ -7,17 +7,17 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+const auth_routes = require("./routes/auth-routes");
+
+app.use("/api", auth_routes);
+
 app.use((err, req, res, next) => {
   if (err) {
-    res.status(err.statusCode).send(err.message);
+    res.status(err.statusCode).json({ err });
   } else {
     res.status(500).send("Internal server error");
   }
 });
-
-const auth_routes = require("./routes/auth-routes");
-
-app.use("/api", auth_routes);
 
 mongoose
   .connect(process.env.DB_URI, {
