@@ -28,6 +28,16 @@ const userSchema = new mongoose.Schema(
         type: Array,
         required: true,
       },
+      profileImageURL: {
+        type: String,
+      },
+      coverImageURL: {
+        type: String,
+      },
+      toolbox: {
+        type: Array,
+        required: true,
+      },
     },
   },
   { timestamps: true }

@@ -18,10 +18,15 @@ exports.postRegister = async (req, res, next) => {
         userData: {
           reputationPoints: 0,
           favouritePosts: [],
+          toolbox: [],
+          profileImageURL:
+            "http://s3.amazonaws.com/37assets/svn/765-default-avatar.png",
+          coverImageURL:
+            "https://images.unsplash.com/photo-1587502538004-e9ec84b491c4?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
         },
       });
       await newUser.save();
-      res.status(200).send("User created!");
+      res.status(200).json("User created!");
     } else {
       throw { statusCode: 400, message: "This account already exists!" };
     }
@@ -32,9 +37,10 @@ exports.postRegister = async (req, res, next) => {
 
 exports.postSignIn = async (req, res, next) => {
   const { email, password } = req.body;
+  console.log(email, password);
 
   try {
-    if (!email | !password) {
+    if (!email || !password) {
       throw { statusCode: 400, message: "Please fill in all fields!" };
     }
 

@@ -13,9 +13,9 @@ app.use("/api", auth_routes);
 
 app.use((err, req, res, next) => {
   if (err) {
-    res.status(err.statusCode).json({ err });
+    res.status(err.statusCode).json(err.message);
   } else {
-    res.status(500).send("Internal server error");
+    res.status(500).json("Internal server error");
   }
 });
 
