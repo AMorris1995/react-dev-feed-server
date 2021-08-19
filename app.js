@@ -8,8 +8,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 const auth_routes = require("./routes/auth-routes");
-
+const post_routes = require("./routes/post-routes");
+const user_routes = require("./routes/user-routes");
+app.use("/api", post_routes);
 app.use("/api", auth_routes);
+app.use("/api", user_routes);
 
 app.use((err, req, res, next) => {
   if (err) {
